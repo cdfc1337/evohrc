@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Torneio</title>
+    <style>
+        /* Estilos gerais para o fundo e texto */
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: -100px; /* Adiciona um espaçamento do topo */
+            flex-direction: column; /* Organiza os itens em coluna (formulário e imagem) */
+            height: 100vh;
+
+        }
+
+        /* Centralização e estilo do formulário */
+        form {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            width: 320px;
+            text-align: center;
+        }
+
+        /* Estilo dos elementos do formulário */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input, select, button {
+            width: 100%;
+            max-width: 100%; /* Garante que o tamanho máximo seja controlado */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        select {
+            background-color: #444;
+            color: white;
+            text-overflow: ellipsis; /* Corta textos longos nas opções, se necessário */
+        }
+
+        /* Remove as setas de input type="number" */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Para Firefox */
+            appearance: textfield;     /* Para compatibilidade adicional */
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+            /* Estilo da imagem abaixo do formulário */
+        img {
+            width: 100%;
+            max-width: 180px; /* Limita a largura da imagem */
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h1>Evolution HRC Payouts</h1>
+        <label for="sala">Poker Site:</label>
+        <select name="sala" id="sala" required>
+            {% for sala in salas %}
+            <option value="{{ sala['codigo'] }}">{{ sala['nome'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="id_torneio">Tournament ID:</label>
+        <input type="number" id="id_torneio" name="id_torneio" required>
+
+        <label for="fichas_iniciais">Starting Stack:</label>
+        <input type="number" id="fichas_iniciais" name="fichas_iniciais" required>
+
+        <button type="submit">GET STRUCTURE</button>
+    </form>
+
+    <img src="{{ url_for('static', filename='logo2.jpeg') }}" alt="Descrição da Imagem">
+</body>
+</html>
